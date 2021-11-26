@@ -1,13 +1,20 @@
----
-################
-# Build & Test #
-################
-
 kind: pipeline
-name: run_tests
+name: default
 
 steps:
-  - name: engine_test
-    image: python:3.7.2
-    commands:
-    - lscpu
+  # - name: install
+  #   image: composer
+  #   commands:
+  #   - composer install
+  - name: scp files
+    image: appleboy/drone-scp
+    settings:
+      host: 
+        from_secret: home_host
+      username: 
+        from_secret: home_user
+      key: 
+        from_secret: home_key
+      port: 22
+      target: /home/deploy/${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
+      source: ./
